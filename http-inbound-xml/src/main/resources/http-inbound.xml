@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/integration"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:int-http="http://www.springframework.org/schema/integration/http"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/integration
+			http://www.springframework.org/schema/integration/spring-integration.xsd
+			http://www.springframework.org/schema/integration/http 
+			http://www.springframework.org/schema/integration/http/spring-integration-http.xsd">
+
+    <int-http:inbound-gateway id = "inboundGateway"
+                              request-channel="incomingChannel"
+                              path="/inbound"
+                              supported-methods="POST" 
+                              request-payload-type="java.lang.String"  />
+    <channel id="incomingChannel"/>
+    <beans:bean id="inboundService" class="com.senyume.integration.service.InboundService" />
+    <service-activator input-channel="incomingChannel"
+                        ref="inboundService"
+                        method="handleIncomingRequest"/>
+
+    <!-- this section lets us intercept and log every message -->
+    <channel id="logger" />
+    <logging-channel-adapter channel="logger"  level="INFO" log-full-message="true"/>
+    <wire-tap channel="logger" />
+
+</beans:beans>

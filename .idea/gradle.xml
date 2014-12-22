@@ -9,7 +9,10 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/hello-world-javaconfig" />
+            <option value="$PROJECT_DIR$/hello-world-xml" />
             <option value="$PROJECT_DIR$/http-gateway" />
+            <option value="$PROJECT_DIR$/http-inbound" />
           </set>
         </option>
       </GradleProjectSettings>

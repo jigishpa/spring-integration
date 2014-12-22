@@ -2,3 +2,9 @@ rootProject.name = 'spring-integration'
 
 include 'http-gateway'
 
+include 'hello-world-xml'
+
+include 'hello-world-javaconfig'
+
+include 'http-inbound'
+
