@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
+@RequestMapping("/bookstore-rest-api")
 public class BookController {
 
 	@RequestMapping(value = "/books", method = RequestMethod.GET)

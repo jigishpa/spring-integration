@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
+@RequestMapping("/tasks-rest-api")
 public class TaskController {
 	
 	@RequestMapping(value = "/tasks", method = RequestMethod.GET)

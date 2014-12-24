@@ -6,7 +6,6 @@
       <module fileurl="file://$PROJECT_DIR$/bookstore-rest-api/bookstore-rest-api.iml" filepath="$PROJECT_DIR$/bookstore-rest-api/bookstore-rest-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/hello-world-javaconfig/hello-world-javaconfig.iml" filepath="$PROJECT_DIR$/hello-world-javaconfig/hello-world-javaconfig.iml" />
       <module fileurl="file://$PROJECT_DIR$/hello-world-xml/hello-world-xml.iml" filepath="$PROJECT_DIR$/hello-world-xml/hello-world-xml.iml" />
-      <module fileurl="file://$PROJECT_DIR$/http-gateway/http-gateway.iml" filepath="$PROJECT_DIR$/http-gateway/http-gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/http-inbound-xml/http-inbound-xml.iml" filepath="$PROJECT_DIR$/http-inbound-xml/http-inbound-xml.iml" />
       <module fileurl="file://$PROJECT_DIR$/http-outbound-xml/http-outbound-xml.iml" filepath="$PROJECT_DIR$/http-outbound-xml/http-outbound-xml.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-integration.iml" filepath="$PROJECT_DIR$/spring-integration.iml" />

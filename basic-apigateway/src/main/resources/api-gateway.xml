@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/integration"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:int-http="http://www.springframework.org/schema/integration/http"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/integration
+			http://www.springframework.org/schema/integration/spring-integration.xsd
+			http://www.springframework.org/schema/integration/http 
+			http://www.springframework.org/schema/integration/http/spring-integration-http.xsd">
+
+    <channel id="apiRequestChannel" />
+    <channel id="apiResponseChannel" />
+    <channel id="routerChannel" />
+    <channel id="bookstoreChannel" />
+    <channel id="tasksChannel" />
+    <int-http:inbound-gateway id = "apiGateway" 
+                              supported-methods="GET, POST"
+                              request-channel="apiRequestChannel"
+                              reply-channel="apiResponseChannel"
+                              path="/{api}/{apipath}"
+                              request-payload-type="java.lang.String">
+        <int-http:header name="api" expression="#pathVariables.api"/>
+        <int-http:header name="apiPath" expression="#pathVariables.apipath" />
+    </int-http:inbound-gateway>
+    <header-enricher input-channel="apiRequestChannel"
+                       output-channel="routerChannel">
+        <header name="finalApiUrl" expression="@apiLocatorService.getFinalApiUrl(headers)" />
+    </header-enricher>
+    <header-value-router input-channel="routerChannel" header-name="api">
+        <mapping value="bookstore-rest-api" channel="bookstoreChannel" />
+        <mapping value="tasks-rest-api" channel="tasksChannel" />
+    </header-value-router>
+    <int-http:outbound-gateway id="bookstoreGateway"
+                               request-channel="bookstoreChannel"
+                               reply-channel="apiResponseChannel"
+                               http-method-expression="headers.http_requestMethod"
+                               url-expression="headers.finalApiUrl"
+                               expected-response-type="java.lang.String"
+                               reply-timeout="1000" />
+    <int-http:outbound-gateway id="tasksGateway"
+                               request-channel="tasksChannel"
+                               reply-channel="apiResponseChannel"
+                               http-method-expression="headers.http_requestMethod"
+                               url-expression="headers.finalApiUrl"
+                               expected-response-type="java.lang.String"
+                               reply-timeout="1000" />
+
+
+    <!-- this section lets us intercept and log every message -->
+    <channel id="logger" />
+    <logging-channel-adapter channel="logger"  level="INFO" log-full-message="true"/>
+    <wire-tap channel="logger" />
+
+</beans:beans>
