@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import javax.annotation.PostConstruct;
-import java.util.Map;
 
 /**
  * @author Jigish Patel
@@ -17,9 +16,9 @@ import java.util.Map;
 // This is specifically for Spring Integration. We'll attempt to extract access token so that we can return it back to the user
 // Don't confuse this with the Spring Security token service (that's different from this class)
 @Service("oauth2TokenService")
-public class OAuth2TokenService {
+public class MappingHandlerPostProcessor {
 
-	private static Logger logger = LoggerFactory.getLogger(OAuth2TokenService.class);
+	private static Logger logger = LoggerFactory.getLogger(MappingHandlerPostProcessor.class);
 	
 	@Autowired
 	@Qualifier ("oauth2EndpointHandlerMapping")
@@ -32,25 +31,16 @@ public class OAuth2TokenService {
 	@Autowired
 	@Qualifier ("integrationRequestMappingHandlerMapping")
 	private RequestMappingHandlerMapping integrationRequestMappingHandlerMapping;
-	
-	@PostConstruct
+
+	// we want to give OAuth2 EndpointHandler higher precedence over Spring Integration MappingHandler so that 
+	// all security related handlers fire first. lower order handler fires first
+	// without this ordering, Spring Integration Mapping Handler was firing before OAuth2 Handler and hence the
+	// security MappingHandler didn't get a chance to process /oauth/token or other /oauth/** urls.
+	@PostConstruct								// gets called once all beans have been configured and injected
 	public void setMappingHandlerOrder(){
 		this.oauth2EndpointHandlerMapping.setOrder(0);
 		this.integrationRequestMappingHandlerMapping.setOrder(1);
 		this.requestMappingHandlerMapping.setOrder(2);
 	}
 
-	public String extractAndReturnToken(Map<String,Object> headers){
-		oauth2EndpointHandlerMapping.getHandlerMethods().forEach((key,value) -> logger.info(key + " --> " + value));
-		logger.info("oauth2EndpointHandlerMapping order=" + oauth2EndpointHandlerMapping.getOrder());
-		logger.info("-------");
-		requestMappingHandlerMapping.getHandlerMethods().forEach((key,value) -> logger.info(key + " --> " + value));
-		logger.info("requestMappingHandlerMapping order=" + requestMappingHandlerMapping.getOrder());
-		logger.info("-------");
-		integrationRequestMappingHandlerMapping.getHandlerMethods().forEach((key,value) -> logger.info(key + " --> " + value));
-		logger.info("integrationRequestMappingHandlerMapping order=" + integrationRequestMappingHandlerMapping.getOrder());
-		//logger.info("handlerMapping=" + handlerMapping);
-		return "empty";
-		
-	}
 }

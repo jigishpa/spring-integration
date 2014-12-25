@@ -32,14 +32,10 @@
         <header name="finalApiUrl" expression="@apiLocatorService.getFinalApiUrl(headers)" />
     </header-enricher>
     <header-value-router input-channel="routerChannel" header-name="api">
-        <mapping value="oauth" channel="oauth2TokenChannel" />
         <mapping value="bookstore-rest-api" channel="bookstoreChannel" />
         <mapping value="tasks-rest-api" channel="tasksChannel" />
     </header-value-router>
-    <channel id="oauth2TokenChannel" />
-    <service-activator input-channel="oauth2TokenChannel"
-                       output-channel="apiResponseChannel"
-                       expression="@oauth2TokenService.extractAndReturnToken(headers)" />
+
     <int-http:outbound-gateway id="bookstoreGateway"
                                request-channel="bookstoreChannel"
                                reply-channel="apiResponseChannel"
