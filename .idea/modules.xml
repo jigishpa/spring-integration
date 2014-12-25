@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/api-gateway-with-oauth2/api-gateway-with-oauth2.iml" filepath="$PROJECT_DIR$/api-gateway-with-oauth2/api-gateway-with-oauth2.iml" />
       <module fileurl="file://$PROJECT_DIR$/basic-apigateway/basic-apigateway.iml" filepath="$PROJECT_DIR$/basic-apigateway/basic-apigateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/bookstore-rest-api/bookstore-rest-api.iml" filepath="$PROJECT_DIR$/bookstore-rest-api/bookstore-rest-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/hello-world-javaconfig/hello-world-javaconfig.iml" filepath="$PROJECT_DIR$/hello-world-javaconfig/hello-world-javaconfig.iml" />
