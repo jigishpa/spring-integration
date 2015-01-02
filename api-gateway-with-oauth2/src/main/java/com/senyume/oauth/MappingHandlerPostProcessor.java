@@ -13,8 +13,6 @@ import javax.annotation.PostConstruct;
  * @author Jigish Patel
  */
 
-// This is specifically for Spring Integration. We'll attempt to extract access token so that we can return it back to the user
-// Don't confuse this with the Spring Security token service (that's different from this class)
 @Service("oauth2TokenService")
 public class MappingHandlerPostProcessor {
 
