@@ -9,7 +9,6 @@
       <module fileurl="file://$PROJECT_DIR$/hello-world-xml/hello-world-xml.iml" filepath="$PROJECT_DIR$/hello-world-xml/hello-world-xml.iml" />
       <module fileurl="file://$PROJECT_DIR$/http-inbound-xml/http-inbound-xml.iml" filepath="$PROJECT_DIR$/http-inbound-xml/http-inbound-xml.iml" />
       <module fileurl="file://$PROJECT_DIR$/http-outbound-xml/http-outbound-xml.iml" filepath="$PROJECT_DIR$/http-outbound-xml/http-outbound-xml.iml" />
-      <module fileurl="file://$PROJECT_DIR$/multithread-test/multithread-test.iml" filepath="$PROJECT_DIR$/multithread-test/multithread-test.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-integration.iml" filepath="$PROJECT_DIR$/spring-integration.iml" />
       <module fileurl="file://$PROJECT_DIR$/tasks-rest-api/tasks-rest-api.iml" filepath="$PROJECT_DIR$/tasks-rest-api/tasks-rest-api.iml" />
     </modules>
